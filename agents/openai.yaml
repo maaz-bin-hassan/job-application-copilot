@@ -1,0 +1,4 @@
+interface:
+  display_name: "Job Application Copilot"
+  short_description: "Find jobs and prepare duplicate-safe drafts"
+  default_prompt: "Use $job-application-copilot to find matching jobs, avoid duplicate applications, and prepare tailored Gmail drafts."
