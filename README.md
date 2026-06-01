@@ -82,7 +82,17 @@ Run:
 codex plugin marketplace add maaz-bin-hassan/job-application-copilot
 ```
 
-### 2. Open The Plugin Directory
+### 2. Install From The CLI
+
+Run:
+
+```bash
+codex plugin add job-application-copilot@job-application-copilot
+```
+
+Start a new Codex thread after installation.
+
+### 3. Or Install From The Plugin Directory
 
 Start Codex:
 
@@ -95,8 +105,6 @@ Then enter:
 ```text
 /plugins
 ```
-
-### 3. Install The Plugin
 
 1. Open the **Job Application Copilot** marketplace tab.
 2. Select **Job Application Copilot**.
