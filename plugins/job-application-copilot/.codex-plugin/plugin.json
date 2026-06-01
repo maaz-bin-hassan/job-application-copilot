@@ -1,0 +1,39 @@
+{
+  "name": "job-application-copilot",
+  "version": "0.1.0",
+  "description": "Find strong job matches, prepare tailored application drafts, and avoid duplicate outreach.",
+  "author": {
+    "name": "maaz-bin-hassan",
+    "url": "https://github.com/maaz-bin-hassan"
+  },
+  "homepage": "https://github.com/maaz-bin-hassan/job-application-copilot#readme",
+  "repository": "https://github.com/maaz-bin-hassan/job-application-copilot",
+  "license": "MIT",
+  "keywords": [
+    "jobs",
+    "applications",
+    "gmail",
+    "google-drive",
+    "career"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Job Application Copilot",
+    "shortDescription": "Find jobs and prepare duplicate-safe drafts",
+    "longDescription": "Search for relevant roles, match them against a candidate profile and CV, prepare tailored Gmail drafts, and track decisions in a duplicate-safe Google Drive log.",
+    "developerName": "maaz-bin-hassan",
+    "category": "Productivity",
+    "capabilities": [
+      "Research",
+      "Draft",
+      "Track"
+    ],
+    "websiteURL": "https://github.com/maaz-bin-hassan/job-application-copilot",
+    "defaultPrompt": [
+      "Find strong matching jobs and prepare Gmail drafts. Do not send anything.",
+      "Check my Drive application log and skip duplicate job applications.",
+      "Review my CV and shortlist the strongest roles posted recently."
+    ],
+    "brandColor": "#2563EB"
+  }
+}

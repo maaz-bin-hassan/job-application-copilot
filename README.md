@@ -1,101 +1,141 @@
 # Job Application Copilot
 
-An open-source [Codex](https://openai.com/codex/) skill that helps candidates
-find relevant jobs, compare listings against their CV, prepare tailored Gmail
-drafts, and avoid duplicate applications with a durable Google Drive log.
+[![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![Codex Plugin](https://img.shields.io/badge/Codex-plugin-2563EB)](https://developers.openai.com/codex/plugins)
+
+An open-source Codex plugin for finding relevant jobs, comparing listings
+against a CV, preparing tailored Gmail drafts, and preventing duplicate
+applications with a durable Google Drive log.
 
 The workflow is deliberately review-first:
 
-- It searches for strong matches instead of applying indiscriminately.
-- It uses only experience supported by the selected CV.
-- It prepares Gmail drafts when the Gmail connector is available.
-- It records decisions in one chronological Google Doc when Drive is available.
-- It never sends an email or submits a form without explicit user approval.
+- Search for strong matches instead of applying indiscriminately.
+- Use only experience supported by the selected CV.
+- Prepare Gmail drafts when Gmail tools are available.
+- Record decisions in one chronological Google Doc when Drive tools are available.
+- Never send an email or submit a form without explicit user approval.
 
-## What Is A Codex Skill?
+## Why Use It?
 
-A Codex skill is a folder containing instructions and optional helper resources
-that guide Codex through a repeatable workflow. This repository is designed to
-be cloned directly into the local Codex skills directory.
+Job searching becomes repetitive quickly. This plugin gives Codex a reusable
+process for searching, matching, drafting, and tracking applications without
+sacrificing accuracy or user control.
 
-The main instructions live in [`SKILL.md`](SKILL.md). Supporting references and
-the duplicate-key helper are loaded only when needed.
+It works well for:
+
+- developers and QA engineers looking for relevant roles
+- candidates with separate mobile, web, and QA CVs
+- people who want polished application drafts without duplicate outreach
+- anyone who wants one searchable log of drafted, sent, and skipped roles
 
 ## Features
 
 - Search current job boards, professional platforms, and employer career pages
-- Filter listings by target roles, locations, work modes, recency, and experience
+- Filter by target role, location, work mode, recency, and experience
 - Match job requirements against one or more role-specific CVs
-- Select the most relevant CV for each application
-- Prepare concise, customized Gmail drafts with CV-supported claims
+- Select the strongest CV for each application
+- Prepare concise Gmail drafts using CV-supported claims
 - Keep one Google Doc as a chronological application log
 - Skip roles that were already drafted or sent
 - Normalize common listing URL variations with `scripts/job_key.py`
-- Use the included Pakistan-focused IT profile as an optional starter example
+- Start quickly with an optional Pakistan-focused IT example profile
 
 ## Safety Principles
 
-This skill assists with careful applications. It does not automate uncontrolled
+This plugin helps candidates apply carefully. It does not automate uncontrolled
 outreach.
 
-- Codex must not invent job listings, recruiter emails, or candidate experience.
-- Codex must not send an application email without explicit user approval.
-- Codex must not submit website forms without explicit user approval.
-- Codex must not bypass CAPTCHAs, job-board restrictions, or account protections.
-- CV files, secrets, and personal contact details must stay outside this repo.
+- Do not invent job listings, recruiter emails, or candidate experience.
+- Do not send an application email without explicit user approval.
+- Do not submit website forms without explicit user approval.
+- Do not bypass CAPTCHAs, job-board restrictions, or account protections.
+- Keep CV files, secrets, and personal contact details outside this repository.
 
 ## Requirements
 
-To use the full workflow, prepare:
+To use the complete workflow, prepare:
 
-1. A Codex installation that supports local skills.
+1. A current Codex CLI or Codex app installation with plugin support.
 2. At least one CV file available to Codex.
-3. Web search or browser access for discovering current job listings.
-4. A Gmail connector if you want Codex to create application drafts.
-5. A Google Drive connector if you want Codex to maintain the durable log.
+3. Web search or browser access for current job discovery.
+4. Gmail tools if you want Codex to create application drafts.
+5. Google Drive tools if you want Codex to maintain the durable log.
 6. Python 3 if you want to run the optional duplicate-key helper locally.
 
-The skill still works partially when connectors are unavailable. For example,
-Codex can search jobs and write email text even when it cannot create Gmail
-drafts. It should clearly report any limitation.
+The bundled plugin teaches the workflow. Gmail and Google Drive remain separate
+connected tools so users stay in control of their own accounts and permissions.
 
-## Install
+The plugin still works partially when a connector is unavailable. For example,
+Codex can search roles and write email text even when it cannot create a Gmail
+draft. It should report the limitation clearly.
 
-### Option 1: Clone With Git
+## Install As A Codex Plugin
+
+Codex plugins can be distributed through marketplace repositories. This
+repository includes a marketplace catalog and one installable plugin.
+
+### 1. Add The Marketplace
 
 Run:
 
 ```bash
-mkdir -p ~/.codex/skills
-git clone https://github.com/maaz-bin-hassan/job-application-copilot.git \
-  ~/.codex/skills/job-application-copilot
+codex plugin marketplace add maaz-bin-hassan/job-application-copilot
 ```
 
-### Option 2: Download A ZIP
+### 2. Open The Plugin Directory
 
-1. Open the repository on GitHub.
-2. Select **Code** and then **Download ZIP**.
-3. Extract the archive.
-4. Move the extracted folder to:
-
-```text
-~/.codex/skills/job-application-copilot
-```
-
-### Confirm The Installation
-
-Check that this file exists:
+Start Codex:
 
 ```bash
-test -f ~/.codex/skills/job-application-copilot/SKILL.md && \
-  echo "Job Application Copilot is installed"
+codex
 ```
 
-Restart Codex if the skill does not appear immediately.
+Then enter:
+
+```text
+/plugins
+```
+
+### 3. Install The Plugin
+
+1. Open the **Job Application Copilot** marketplace tab.
+2. Select **Job Application Copilot**.
+3. Choose **Install plugin**.
+4. Start a new Codex thread after installation.
+
+In the Codex app, open **Plugins**, select the marketplace, and choose
+**Add to Codex**.
+
+### 4. Invoke The Plugin
+
+Use the plugin directly:
+
+```text
+@job-application-copilot Find strong matching jobs and prepare Gmail drafts.
+Do not send anything.
+```
+
+You can also invoke the bundled skill explicitly:
+
+```text
+$job-application-copilot Find strong matching jobs and prepare Gmail drafts.
+Do not send anything.
+```
+
+## Install Only The Skill
+
+If your Codex version supports skills but not plugins yet, install the bundled
+skill directly:
+
+```text
+$skill-installer install https://github.com/maaz-bin-hassan/job-application-copilot/tree/main/plugins/job-application-copilot/skills/job-application-copilot
+```
+
+Restart Codex after installation.
 
 ## Prepare Your CV Files
 
-Keep CV files outside this repository. Provide them to Codex through the current
+Keep CV files outside this repository. Provide them to Codex through your
 workspace, attachments, or agent files supported by your environment.
 
 You can provide one general CV or several focused versions:
@@ -106,13 +146,14 @@ web-cv.pdf
 qa-cv.pdf
 ```
 
-When multiple CVs are available, the skill asks Codex to choose the strongest
+When multiple CVs are available, the skill asks Codex to select the strongest
 fit for each role and record which CV was used.
 
 ## Create Your Search Profile
 
 Start from
-[`references/profile-template.md`](references/profile-template.md). Define:
+[`profile-template.md`](plugins/job-application-copilot/skills/job-application-copilot/references/profile-template.md).
+Define:
 
 1. Target job titles and their priority.
 2. Minimum experience requirements.
@@ -124,53 +165,48 @@ Start from
 8. A daily Gmail draft limit.
 9. Available CV labels.
 
-You can paste the completed profile into your Codex request or keep it in a
-separate personal file outside this public repository.
+Paste the completed profile into your Codex request or keep it in a separate
+private file outside this public repository.
 
 The bundled
-[`references/example-pakistan-it-profile.md`](references/example-pakistan-it-profile.md)
+[`example-pakistan-it-profile.md`](plugins/job-application-copilot/skills/job-application-copilot/references/example-pakistan-it-profile.md)
 is an optional starter for IT candidates searching in Pakistan. Adapt it before
 use. It is not a global default.
 
 ## Connect Gmail And Google Drive
 
-The exact connector installation flow depends on your Codex environment.
-
 For the complete workflow:
 
-1. Enable a Gmail connector that allows Codex to create drafts and attach files.
-2. Enable a Google Drive connector that allows Codex to find, create, read, and
-   update a Google Doc.
+1. Enable Gmail tools that allow Codex to create drafts and attach files.
+2. Enable Google Drive tools that allow Codex to find, create, read, and update
+   a Google Doc.
 3. Ask Codex to use one Google Doc as the running application log.
 4. Review the connected account before authorizing any email send.
 
-When a connector is missing, the skill instructs Codex to continue with the
+When a connector is missing, the plugin instructs Codex to continue with the
 available steps and explain what could not be completed.
 
-## Use The Skill
-
-Invoke the skill explicitly with `$job-application-copilot`.
+## Example Prompts
 
 ### Find Matching Jobs
 
 ```text
-Use $job-application-copilot to find strong React Native and Flutter jobs
-matching my profile. Prefer roles posted during the last 24 hours.
+@job-application-copilot Find strong React Native and Flutter jobs matching my
+profile. Prefer roles posted during the last 24 hours.
 ```
 
 ### Search And Prepare Drafts
 
 ```text
-Use $job-application-copilot to find up to 5 strong matches, check my Drive
-application log for duplicates, and prepare Gmail drafts with the best CV.
-Do not send anything.
+@job-application-copilot Find up to 5 strong matches, check my Drive application
+log for duplicates, and prepare Gmail drafts with the best CV. Do not send anything.
 ```
 
 ### Review A Draft
 
 ```text
-Use $job-application-copilot to show me the draft for the Example Labs role
-before I approve sending it.
+@job-application-copilot Show me the draft for the Example Labs role before I
+approve sending it.
 ```
 
 ### Approve A Send
@@ -184,9 +220,9 @@ not permission to send emails.
 
 ## How Duplicate Protection Works
 
-The skill maintains one chronological Google Doc rather than creating a
+The plugin maintains one chronological Google Doc instead of creating a
 separate document for each application. Its log format is defined in
-[`references/application-log-format.md`](references/application-log-format.md).
+[`application-log-format.md`](plugins/job-application-copilot/skills/job-application-copilot/references/application-log-format.md).
 
 Before creating a draft or sending an application, Codex checks:
 
@@ -195,8 +231,6 @@ Before creating a draft or sending an application, Codex checks:
 3. The posting URL or application URL when available.
 4. The hiring email when available.
 5. The generated `job_key` when one was recorded.
-
-Entries can use these statuses:
 
 | Status | Meaning |
 | --- | --- |
@@ -212,7 +246,7 @@ Entries can use these statuses:
 The optional Python helper generates stable keys for listings:
 
 ```bash
-python3 scripts/job_key.py \
+python3 plugins/job-application-copilot/skills/job-application-copilot/scripts/job_key.py \
   --company "Example Labs" \
   --role "React Native Developer" \
   --url "https://example.com/jobs/123?utm_source=linkedin"
@@ -225,24 +259,25 @@ Example output:
 ```
 
 The helper normalizes casing and spacing, removes common tracking parameters,
-and strips URL fragments. As a result, common variations of the same listing
-produce the same key.
+and strips URL fragments. Common variations of the same listing produce the
+same key.
 
 ## Repository Layout
 
 ```text
 .
+├── .agents/plugins/marketplace.json
 ├── LICENSE
 ├── README.md
-├── SKILL.md
-├── agents/
-│   └── openai.yaml
-├── references/
-│   ├── application-log-format.md
-│   ├── example-pakistan-it-profile.md
-│   └── profile-template.md
-└── scripts/
-    └── job_key.py
+└── plugins/
+    └── job-application-copilot/
+        ├── .codex-plugin/plugin.json
+        └── skills/
+            └── job-application-copilot/
+                ├── SKILL.md
+                ├── agents/openai.yaml
+                ├── references/
+                └── scripts/job_key.py
 ```
 
 ## Validate A Local Copy
@@ -250,7 +285,7 @@ produce the same key.
 Run the helper:
 
 ```bash
-python3 scripts/job_key.py \
+python3 plugins/job-application-copilot/skills/job-application-copilot/scripts/job_key.py \
   --company "Example Labs" \
   --role "React Native Developer" \
   --url "https://example.com/jobs/123?utm_source=linkedin"
@@ -259,16 +294,11 @@ python3 scripts/job_key.py \
 Run a Python syntax check:
 
 ```bash
-python3 -m py_compile scripts/job_key.py
+python3 -m py_compile \
+  plugins/job-application-copilot/skills/job-application-copilot/scripts/job_key.py
 ```
 
-If you have the Codex `skill-creator` validation dependencies installed, run:
-
-```bash
-python3 ~/.codex/skills/.system/skill-creator/scripts/quick_validate.py .
-```
-
-## Publish Your Fork On GitHub
+## Publish Your Fork
 
 After customizing a fork:
 
@@ -280,12 +310,33 @@ git remote add origin https://github.com/YOUR_USERNAME/job-application-copilot.g
 git push -u origin main
 ```
 
-Do not commit private CVs, contact details, secrets, or a personal application
+Users of your fork can then add your marketplace:
+
+```bash
+codex plugin marketplace add YOUR_USERNAME/job-application-copilot
+```
+
+Do not commit private CVs, personal contact details, secrets, or an application
 log.
+
+## Official Codex Plugin Directory
+
+OpenAI's documentation currently says that adding plugins to the official
+Plugin Directory and self-serve plugin publishing are coming soon.
+
+Until that opens, distribute this plugin through its GitHub marketplace command,
+share it with the Codex community, and collect feedback from real users.
+
+## Help The Project Grow
+
+- Star the repository if the plugin saves you time.
+- Share a short demo showing job discovery, duplicate detection, and Gmail drafts.
+- Open issues for missing workflows or unclear setup steps.
+- Submit focused pull requests that keep candidate data private.
 
 ## Contributing
 
-Contributions are welcome. Keep the skill:
+Contributions are welcome. Keep the plugin:
 
 - useful for a broad range of candidates
 - cautious about sending and form submission

@@ -1,0 +1,20 @@
+{
+  "name": "job-application-copilot",
+  "interface": {
+    "displayName": "Job Application Copilot"
+  },
+  "plugins": [
+    {
+      "name": "job-application-copilot",
+      "source": {
+        "source": "local",
+        "path": "./plugins/job-application-copilot"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    }
+  ]
+}
